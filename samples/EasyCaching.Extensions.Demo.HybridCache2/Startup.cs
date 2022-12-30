@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using EasyCaching.Serialization.SystemTextJson.Configurations;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Savorboard.CAP.InMemoryMessageQueue;
 
 namespace EasyCaching.Extensions.Demo.HybridCache2
 {
@@ -21,11 +23,14 @@ namespace EasyCaching.Extensions.Demo.HybridCache2
             //new configuration
             services.AddEasyCaching(option =>
             {
+                option.WithSystemTextJson();
+
                 // local
                 option.UseInMemory("m1");
                 // distributed
                 option.UseRedis(config =>
                 {
+                    config.SerializerName= "json";
                     config.DBConfig.Endpoints.Add(new Core.Configurations.ServerEndPoint("127.0.0.1", 6379));
                     config.DBConfig.Database = 5;
                 }, "myredis");
@@ -52,12 +57,14 @@ namespace EasyCaching.Extensions.Demo.HybridCache2
             services.AddCap(x =>
             {
                 x.UseInMemoryStorage();
-                x.UseRabbitMQ(configure =>
-                {
-                    configure.HostName = "127.0.0.1";
-                    configure.UserName = "admin";
-                    configure.Password = "admin";
-                });
+                //x.UseRabbitMQ(configure =>
+                //{
+                //    configure.HostName = "127.0.0.1";
+                //    configure.UserName = "admin";
+                //    configure.Password = "admin";
+                //});
+                x.UseInMemoryMessageQueue();
+
                 x.UseDashboard();
             });
         }

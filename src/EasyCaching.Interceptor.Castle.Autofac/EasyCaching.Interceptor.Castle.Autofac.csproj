@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyCaching.Interceptor.Castle" Version="0.8.10" />
+    <PackageReference Include="EasyCaching.Interceptor.Castle" Version="1.7.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.7" />
   </ItemGroup>
 

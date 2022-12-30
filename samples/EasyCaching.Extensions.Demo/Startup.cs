@@ -4,6 +4,7 @@ using Autofac.Extensions.DependencyInjection;
 using EasyCaching.Core;
 using EasyCaching.Extensions.Demo.Services;
 using EasyCaching.Redis;
+using EasyCaching.Serialization.SystemTextJson.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,8 +38,10 @@ namespace EasyCaching.Extensions.Demo
 
             services.AddEasyCaching(options =>
             {
+                options.WithSystemTextJson();
                 options.UseRedis(config =>
                 {
+                    config.SerializerName = "json";
                     config.DBConfig.Endpoints.Add(new Core.Configurations.ServerEndPoint("127.0.0.1", 6379));
                     config.DBConfig.Database = 5;
                 }, "myredis");

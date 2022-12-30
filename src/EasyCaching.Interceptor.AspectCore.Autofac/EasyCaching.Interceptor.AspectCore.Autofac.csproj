@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyCaching.Interceptor.AspectCore" Version="0.8.10" />
-    <PackageReference Include="AspectCore.Extensions.Autofac" Version="2.1.0" />
+    <PackageReference Include="EasyCaching.Interceptor.AspectCore" Version="1.7.0" />
+    <PackageReference Include="AspectCore.Extensions.Autofac" Version="2.3.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.7" />
   </ItemGroup>
 
